@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreRemove;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -40,6 +41,14 @@ public class ProductEntity extends PanacheEntityBase{
         }
         auditableFields.setInclusionDate(LocalDateTime.now());
         this.isActive = true;
+    }
+    
+    @PreUpdate
+    public void onUpdate() {
+        if (auditableFields == null) {
+            auditableFields = new AuditableFields();
+        }
+        auditableFields.setModificationDate(LocalDateTime.now());
     }
     
     @PreRemove

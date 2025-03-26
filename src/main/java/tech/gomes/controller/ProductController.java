@@ -7,6 +7,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -27,6 +28,8 @@ public class ProductController {
         this.productService = productService;
     }   
     
+    // GET ENDPOINTS
+    
     @GET
     public Response findAll(@QueryParam("page") @DefaultValue("0") Integer page
             ,@QueryParam("pageSize") @DefaultValue("10") Integer pageSize
@@ -40,10 +43,19 @@ public class ProductController {
     public Response findById (@PathParam("id") UUID productId){
         return Response.ok(productService.findById(productId)).build();
     }
-    
+
+    // POST ENDPOINT
     @POST
     @Transactional
     public Response createProduct(ProductEntity productEntity){
         return Response.ok(productService.createProduct(productEntity)).build();
+    }
+    
+    // PUT ENDPOINT
+    @PUT
+    @Path("/{id}")
+    @Transactional
+    public Response updateProduct(@PathParam("id") UUID productId, ProductEntity productEntity){
+        return Response.ok(productService.updateProduct(productId, productEntity)).build();
     }
 }

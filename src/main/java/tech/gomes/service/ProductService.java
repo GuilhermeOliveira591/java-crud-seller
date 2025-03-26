@@ -24,5 +24,15 @@ public class ProductService {
                 .page(page, pageSize)
                 .list();
     }
+
+    public ProductEntity updateProduct(UUID productId, ProductEntity productEntity) {
+        var product = findById(productId);
+        
+        product.description = productEntity.description;
+        
+        ProductEntity.persist(product);
+        
+        return product;
+    }
     
 }

@@ -4,6 +4,7 @@ package tech.gomes.controller;
 import jakarta.transaction.Transactional;
 import tech.gomes.entity.ProductEntity;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -58,4 +59,16 @@ public class ProductController {
     public Response updateProduct(@PathParam("id") UUID productId, ProductEntity productEntity){
         return Response.ok(productService.updateProduct(productId, productEntity)).build();
     }
+    
+    // DELETE ENDPOINT
+    @DELETE
+    @Path("/{id}")
+    @Transactional
+    public Response deleteById(@PathParam("id") UUID productId){
+        productService.deleteById(productId);
+        return Response.noContent().build();
+    }
+    
+    
+    
 }

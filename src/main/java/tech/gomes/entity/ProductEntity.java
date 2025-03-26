@@ -50,17 +50,5 @@ public class ProductEntity extends PanacheEntityBase{
         }
         auditableFields.setModificationDate(LocalDateTime.now());
     }
-    
-    @PreRemove
-    public void onDelete() {
-        if (auditableFields == null) {
-            auditableFields = new AuditableFields();
-        }
-        
-        if(this.auditableFields.getModificationDate() == null && this.isActive == true){
-            this.isActive = false;
-            auditableFields.setModificationDate(LocalDateTime.now());
-        }   
-    }
 
 }

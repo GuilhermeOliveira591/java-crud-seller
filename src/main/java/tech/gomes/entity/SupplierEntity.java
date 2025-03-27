@@ -69,6 +69,10 @@ public class SupplierEntity {
 
     public SupplierEntity() {
     }
+    
+    public SupplierEntity(UUID supplierId) {
+        this.supplierId = supplierId;
+    }
 
     // Getters
     public UUID getSupplierId() {

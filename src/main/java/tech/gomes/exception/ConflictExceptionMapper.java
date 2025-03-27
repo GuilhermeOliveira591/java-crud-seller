@@ -6,12 +6,12 @@ import jakarta.ws.rs.ext.Provider;
 import java.util.Map;
 
 
-@Provider
-public class SupplierCouldNotBeDeletedMapper implements ExceptionMapper<SupplierCouldNotBeDeletedException>{
+@Provider    
+public class ConflictExceptionMapper implements ExceptionMapper<ConflictException>{
 
     @Override
-    public Response toResponse(SupplierCouldNotBeDeletedException exception) {
-         return Response.status(Response.Status.CONFLICT)
+    public Response toResponse(ConflictException exception) {
+        return Response.status(Response.Status.CONFLICT)
                        .entity(Map.of("message", exception.getMessage()))
                        .build();
     }

@@ -4,8 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.UUID;
 import tech.gomes.entity.ProductEntity;
-import tech.gomes.exception.ProductCouldNotBeDeletedException;
-import tech.gomes.exception.ProductNotFoundException;
+import tech.gomes.exception.ConflictException;
+import tech.gomes.exception.NotFoundException;
 import tech.gomes.repository.ProductRepository;
 
 @ApplicationScoped
@@ -24,7 +24,7 @@ public class ProductService {
     
     public ProductEntity findById(UUID productId){
         return (ProductEntity) productRepository.findByIdOptional(productId)
-            .orElseThrow(() -> new ProductNotFoundException("Product with ID " + productId + " not found"));
+            .orElseThrow(() -> new NotFoundException("Product with ID " + productId + " not found"));
     }
     
     public List<ProductEntity> findAll(Integer page, Integer pageSize){
@@ -49,7 +49,7 @@ public class ProductService {
         if(product.getAuditableFields().getModificationDate() == null){
             productRepository.deleteById(product.getProductId());
         } else{
-            throw new ProductCouldNotBeDeletedException("Product cannot be deleted because it has been modified before");
+            throw new ConflictException("Product cannot be deleted because it has been modified before");
         }    
     }
     

@@ -13,14 +13,14 @@ public class InvoiceEntity {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "invoice_number", nullable = false)
+    @Column(name = "invoiceNumber", nullable = false)
     private String invoiceNumber;
 
-    @Column(name = "issue_datetime", nullable = false)
+    @Column(name = "issueDateTime", nullable = false)
     private LocalDateTime issueDateTime;
 
     @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false)
+    @JoinColumn(name = "supplierId", nullable = false)
     private SupplierEntity supplier;
 
     @Column(name = "address", nullable = false)
@@ -65,11 +65,11 @@ public class InvoiceEntity {
     public void setInvoiceNumber(String invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
     }
-
+    
     public void setIssueDateTime(LocalDateTime issueDateTime) {
         this.issueDateTime = issueDateTime;
     }
-
+    
     public void setSupplier(SupplierEntity supplier) {
         this.supplier = supplier;
     }
@@ -81,4 +81,6 @@ public class InvoiceEntity {
     public void setTotalValue(Double totalValue) {
         this.totalValue = totalValue;
     }
+    
+    
 }

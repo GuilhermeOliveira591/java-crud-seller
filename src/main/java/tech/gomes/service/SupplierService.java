@@ -4,9 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.UUID;
 import tech.gomes.entity.SupplierEntity;
-import tech.gomes.exception.SupplierCouldNotBeCreatedException;
-import tech.gomes.exception.SupplierCouldNotBeDeletedException;
-import tech.gomes.exception.SupplierNotFoundException;
+import tech.gomes.exception.ConflictException;
+import tech.gomes.exception.NotFoundException;
 import tech.gomes.repository.SupplierRepository;
 
 @ApplicationScoped
@@ -20,7 +19,7 @@ public class SupplierService {
     
     public SupplierEntity createSupplier(SupplierEntity supplierEntity){
         if(findByCnpj(supplierEntity.getCnpj()) != null){
-            throw new SupplierCouldNotBeCreatedException("Supplier with CNPJ " + supplierEntity.getCnpj() + " already exists in the database");
+            throw new ConflictException("Supplier with CNPJ " + supplierEntity.getCnpj() + " already exists in the database");
         }
         
         supplierRepository.persist(supplierEntity);
@@ -29,7 +28,7 @@ public class SupplierService {
     
     public SupplierEntity findById(UUID supplierId){
         return (SupplierEntity) supplierRepository.findByIdOptional(supplierId)
-            .orElseThrow(() -> new SupplierNotFoundException("Supplier with ID " + supplierId + " not found"));
+            .orElseThrow(() -> new NotFoundException("Supplier with ID " + supplierId + " not found"));
     }
     
     public SupplierEntity findByCnpj(String cnpj){
@@ -65,7 +64,7 @@ public class SupplierService {
         if(supplier.getAuditableFields().getModificationDate() == null){
             supplierRepository.deleteById(supplier.getSupplierId());
         } else{
-            throw new SupplierCouldNotBeDeletedException("Supplier cannot be deleted because it has been modified before");
+            throw new ConflictException("Supplier cannot be deleted because it has been modified before");
         }    
     }
     

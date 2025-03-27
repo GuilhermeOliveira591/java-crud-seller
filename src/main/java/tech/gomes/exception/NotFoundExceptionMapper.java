@@ -6,12 +6,12 @@ import jakarta.ws.rs.ext.Provider;
 import java.util.Map;
 
 
-@Provider
-public class SupplierCouldNotBeCreatedMapper implements ExceptionMapper<SupplierCouldNotBeCreatedException>{
+@Provider    
+public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException>{
 
     @Override
-    public Response toResponse(SupplierCouldNotBeCreatedException exception) {
-         return Response.status(Response.Status.CONFLICT)
+    public Response toResponse(NotFoundException exception) {
+        return Response.status(Response.Status.NOT_FOUND)
                        .entity(Map.of("message", exception.getMessage()))
                        .build();
     }

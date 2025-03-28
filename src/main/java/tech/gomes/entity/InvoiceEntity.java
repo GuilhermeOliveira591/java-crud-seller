@@ -11,7 +11,7 @@ public class InvoiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Long id;
 
     @Column(name = "invoiceNumber", nullable = false)
     private String invoiceNumber;
@@ -19,21 +19,44 @@ public class InvoiceEntity {
     @Column(name = "issueDateTime", nullable = false)
     private LocalDateTime issueDateTime;
 
-    @ManyToOne
-    @JoinColumn(name = "supplierId", nullable = false)
+    @Column(name = "supplierId", nullable = false)
     private UUID supplierId;
 
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "total_value", nullable = false)
+    @Column(name = "totalValue", nullable = false)
     private Double totalValue;
+    
+    @Column(name = "isActive", nullable = false)
+    private boolean isActive;
+    
+    @Embedded
+    private AuditableFields auditableFields;
+    
+    @PrePersist
+    public void onCreate() {
+        if (auditableFields == null) {
+            auditableFields = new AuditableFields();
+        }
+        auditableFields.setInclusionDate(LocalDateTime.now());
+        this.isActive = true;
+    }
+    
+    @PreUpdate
+    public void onUpdate() {
+        if (auditableFields == null) {
+            auditableFields = new AuditableFields();
+        }
+        auditableFields.setModificationDate(LocalDateTime.now());
+    }
 
     public InvoiceEntity() {
     }
 
     // Getters
-    public UUID getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -57,8 +80,17 @@ public class InvoiceEntity {
         return totalValue;
     }
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public AuditableFields getAuditableFields() {
+        return auditableFields;
+    }
+
     // Setters
-    public void setId(UUID id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -81,6 +113,13 @@ public class InvoiceEntity {
     public void setTotalValue(Double totalValue) {
         this.totalValue = totalValue;
     }
-    
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setAuditableFields(AuditableFields auditableFields) {
+        this.auditableFields = auditableFields;
+    }
     
 }

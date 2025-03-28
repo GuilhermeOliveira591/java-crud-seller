@@ -14,18 +14,18 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import tech.gomes.entity.InvoiceEntity;
-import tech.gomes.service.InvoiceService;
+import tech.gomes.entity.InvoiceItemEntity;
+import tech.gomes.service.InvoiceItemService;
 
 @Path("invoices")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
-public class InvoiceController {  
-    private final InvoiceService invoiceService;
+public class InvoiceItemController {  
+    private final InvoiceItemService invoiceItemService;
 
-    public InvoiceController(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
+    public InvoiceItemController(InvoiceItemService invoiceItemService) {
+        this.invoiceItemService = invoiceItemService;
     }
 
     // GET ENDPOINTS
@@ -33,29 +33,29 @@ public class InvoiceController {
     public Response findAll(@QueryParam("page") @DefaultValue("0") Integer page
             ,@QueryParam("pageSize") @DefaultValue("10") Integer pageSize
     ){
-        var invoices = invoiceService.findAll(page, pageSize);
+        var invoices = invoiceItemService.findAll(page, pageSize);
         return Response.ok(invoices).build();
     }
     
     @GET
     @Path("/{id}")
     public Response findById (@PathParam("id") Long id){
-        return Response.ok(invoiceService.findById(id)).build();
+        return Response.ok(invoiceItemService.findById(id)).build();
     }
 
     // POST ENDPOINT
     @POST
     @Transactional
-    public Response createInvoice(InvoiceEntity invoiceEntity){
-        return Response.ok(invoiceService.createInvoice(invoiceEntity)).build();
+    public Response createInvoiceItem(InvoiceItemEntity invoiceItemEntity){
+        return Response.ok(invoiceItemService.createInvoiceItem(invoiceItemEntity)).build();
     }
     
     // PUT ENDPOINT
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response updateInvoice(@PathParam("id") Long id, InvoiceEntity invoiceEntity){
-        return Response.ok(invoiceService.updateInvoice(id, invoiceEntity)).build();
+    public Response updateInvoiceItem(@PathParam("id") Long id, InvoiceItemEntity invoiceItemEntity){
+        return Response.ok(invoiceItemService.updateInvoiceItem(id, invoiceItemEntity)).build();
     }
    
     // DELETE ENDPOINT
@@ -63,7 +63,7 @@ public class InvoiceController {
     @Path("/{id}")
     @Transactional
     public Response deleteById(@PathParam("id") Long id){
-        invoiceService.deleteById(id);
+        invoiceItemService.deleteById(id);
         return Response.noContent().build();
     }
     

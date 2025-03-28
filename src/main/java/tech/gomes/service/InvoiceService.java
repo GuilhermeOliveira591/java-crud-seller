@@ -2,12 +2,9 @@ package tech.gomes.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
-import java.util.UUID;
 import tech.gomes.entity.InvoiceEntity;
-import tech.gomes.entity.SupplierEntity;
 import tech.gomes.exception.NotFoundException;
 import tech.gomes.repository.InvoiceRepository;
-import tech.gomes.repository.SupplierRepository;
 
 @ApplicationScoped
 public class InvoiceService {
@@ -23,9 +20,9 @@ public class InvoiceService {
         return invoiceEntity;
     }
     
-    public InvoiceEntity findById(UUID invoiceId){
-        return (InvoiceEntity) invoiceRepository.findByIdOptional(invoiceId)
-                .orElseThrow(() -> new NotFoundException("Invoice with ID " + invoiceId + " not found"));
+    public InvoiceEntity findById(Long id){
+        return (InvoiceEntity) invoiceRepository.findByIdOptional(id)
+            .orElseThrow(() -> new NotFoundException("Supplier with ID " + id + " not found"));
     }
     
     public List<InvoiceEntity> findAll(Integer page, Integer pageSize){
@@ -34,8 +31,8 @@ public class InvoiceService {
                 .list();
     }
 
-    public InvoiceEntity updateInvoice(UUID invoiceId, InvoiceEntity invoiceEntity){
-        var invoice = findById(invoiceEntity.getId());
+    public InvoiceEntity updateInvoice(Long id, InvoiceEntity invoiceEntity){
+        var invoice = findById(id);
         
         invoice.setInvoiceNumber(invoiceEntity.getInvoiceNumber());
         invoice.setIssueDateTime(invoiceEntity.getIssueDateTime());  
@@ -48,8 +45,8 @@ public class InvoiceService {
         return invoice;
     }
 
-    public void deleteById(UUID invoiceId) {
-        var invoice = findById(invoiceId);
+    public void deleteById(Long id) {
+        var invoice = findById(id);
         
         invoiceRepository.deleteById(invoice.getId()); 
     }

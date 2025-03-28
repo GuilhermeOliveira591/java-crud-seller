@@ -2,6 +2,7 @@ package tech.gomes.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_invoice_items")
@@ -12,19 +13,17 @@ public class InvoiceItemEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private ProductEntity product;
+    @Column(name = "productId", nullable = false)
+    private UUID productId;
 
-    @Column(name = "unit_price", nullable = false)
+    @Column(name = "unitPrice", nullable = false)
     private BigDecimal unitPrice;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "invoice_id", nullable = false)
-    private InvoiceEntity invoiceEntity;
+    @Column(name = "invoiceId", nullable = false)
+    private UUID invoiceId;
 
     @Transient
     private BigDecimal totalItemValue;
@@ -37,8 +36,8 @@ public class InvoiceItemEntity {
         return id;
     }
 
-    public ProductEntity getProduct() {
-        return product;
+    public UUID getProductId() {
+        return productId;
     }
 
     public BigDecimal getUnitPrice() {
@@ -49,8 +48,8 @@ public class InvoiceItemEntity {
         return quantity;
     }
 
-    public InvoiceEntity getInvoiceEntity() {
-        return invoiceEntity;
+    public UUID getInvoiceId() {
+        return invoiceId;
     }
 
     public BigDecimal getTotalItemValue() {
@@ -62,8 +61,8 @@ public class InvoiceItemEntity {
         this.id = id;
     }
 
-    public void setProduct(ProductEntity product) {
-        this.product = product;
+    public void setProductId(UUID productId) {
+        this.productId = productId;
     }
 
     public void setUnitPrice(BigDecimal unitPrice) {
@@ -74,8 +73,8 @@ public class InvoiceItemEntity {
         this.quantity = quantity;
     }
 
-    public void setInvoiceEntity(InvoiceEntity invoiceEntity) {
-        this.invoiceEntity = invoiceEntity;
+    public void setInvoiceId(UUID invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public void setTotalItemValue(BigDecimal totalItemValue) {

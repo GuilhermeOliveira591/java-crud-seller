@@ -21,7 +21,7 @@ public class InvoiceEntity {
 
     @ManyToOne
     @JoinColumn(name = "supplierId", nullable = false)
-    private SupplierEntity supplier;
+    private UUID supplierId;
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -45,8 +45,8 @@ public class InvoiceEntity {
         return issueDateTime;
     }
 
-    public SupplierEntity getSupplier() {
-        return supplier;
+    public UUID getSupplierId() {
+        return supplierId;
     }
 
     public String getAddress() {
@@ -69,9 +69,9 @@ public class InvoiceEntity {
     public void setIssueDateTime(LocalDateTime issueDateTime) {
         this.issueDateTime = issueDateTime;
     }
-    
-    public void setSupplier(SupplierEntity supplier) {
-        this.supplier = supplier;
+
+    public void setSupplierId(UUID supplierId) {
+        this.supplierId = supplierId;
     }
 
     public void setAddress(String address) {

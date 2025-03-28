@@ -7,6 +7,7 @@ import tech.gomes.entity.InvoiceEntity;
 import tech.gomes.entity.SupplierEntity;
 import tech.gomes.exception.NotFoundException;
 import tech.gomes.repository.InvoiceRepository;
+import tech.gomes.repository.SupplierRepository;
 
 @ApplicationScoped
 public class InvoiceService {
@@ -37,8 +38,8 @@ public class InvoiceService {
         var invoice = findById(invoiceEntity.getId());
         
         invoice.setInvoiceNumber(invoiceEntity.getInvoiceNumber());
-        invoice.setIssueDateTime(invoiceEntity.getIssueDateTime());        
-        invoice.setSupplier(new SupplierEntity(invoiceId));
+        invoice.setIssueDateTime(invoiceEntity.getIssueDateTime());  
+        invoice.setSupplierId(invoiceEntity.getSupplierId());      
         invoice.setAddress(invoiceEntity.getAddress());
         invoice.setTotalValue(invoiceEntity.getTotalValue());
         

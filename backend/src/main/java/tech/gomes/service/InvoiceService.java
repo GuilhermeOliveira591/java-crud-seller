@@ -22,7 +22,7 @@ public class InvoiceService {
     
     public InvoiceEntity findById(Long id){
         return (InvoiceEntity) invoiceRepository.findByIdOptional(id)
-            .orElseThrow(() -> new NotFoundException("Supplier with ID " + id + " not found"));
+            .orElseThrow(() -> new NotFoundException("Invoice with ID " + id + " not found"));
     }
     
     public List<InvoiceEntity> findAll(Integer page, Integer pageSize){

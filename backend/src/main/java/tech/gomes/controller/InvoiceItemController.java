@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.Response;
 import tech.gomes.entity.InvoiceItemEntity;
 import tech.gomes.service.InvoiceItemService;
 
-@Path("invoices")
+@Path("invoiceItems")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 

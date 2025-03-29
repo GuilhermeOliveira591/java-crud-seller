@@ -24,7 +24,7 @@ public class InvoiceItemService {
     
     public InvoiceItemEntity findById(Long id){
         return (InvoiceItemEntity) invoiceItemRepository.findByIdOptional(id)
-            .orElseThrow(() -> new NotFoundException("Supplier with ID " + id + " not found"));
+            .orElseThrow(() -> new NotFoundException("InvoiceItem with ID " + id + " not found"));
     }
     
     public List<InvoiceItemEntity> findAll(Integer page, Integer pageSize){

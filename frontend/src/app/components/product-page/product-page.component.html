@@ -1,0 +1,54 @@
+<!-- <form>
+
+  <p-floatlabel>
+    <input pInputText id="value" [(ngModel)]="value.code" class="ng-dirty ng-invalid" />
+    <label for="value1">Código</label>
+  </p-floatlabel>
+  
+  <br />
+  <p-floatlabel variant="on">
+    <input pInputText id="on_label" [(ngModel)]="value.description" autocomplete="off" />
+    <label for="on_label">Descrição</label>
+  </p-floatlabel>
+  
+</form>
+
+
+
+ -->
+ <div class="card">
+  <form>
+    <div class="grid ui-fluid mt-3 floatlabel-demo gap-2">
+      <br />
+      <div class="campo-codigo">
+
+        <div class="field">
+          <p-floatlabel>
+            <input pInputText id="value" [(ngModel)]="value.code" name="code" />
+            <label for="value">Código</label>
+          </p-floatlabel>
+        </div>
+
+        <div class="field">
+          <p-floatlabel>
+            <input pInputText id="on_label" [(ngModel)]="value.description" name="description" />
+            <label for="on_label">Descrição</label>
+          </p-floatlabel>
+        </div>
+
+        <div class="field">
+          <p-dropdown [options]="statusOptions" [(ngModel)]="value.status" name="status" placeholder="Situação"></p-dropdown>
+        </div>
+
+      </div>
+
+      <div class="btn-actions">
+        <p-button label="Salvar" severity="success" (click)="saveProduct()"/>
+        <p-button label="Cancelar" severity="danger"/>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+

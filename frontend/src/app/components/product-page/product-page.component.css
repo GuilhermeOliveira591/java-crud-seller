@@ -1,0 +1,6 @@
+.campo-codigo, .btn-actions {
+    padding: 10px;
+    display: flex;  /* Torna a div um flex container */
+    gap: 10px;  /* Espaçamento entre os campos */
+    flex-wrap: wrap; /* Garante que não quebre o layout em telas pequenas */
+}

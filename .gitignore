@@ -47,3 +47,4 @@ nb-configuration.xml
 .env
 
 node_modules
+environment.ts
